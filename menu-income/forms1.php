@@ -13,6 +13,24 @@
 	  	</button>
 	</div>
 <?php } ?>
+<!-- <div class="card">
+	<div class="card-body">
+		<form method="post" action="main.php?page=income-edit1">
+  			<div class="form-row">
+  				<div class="form-group col-md-6">
+			      	<label>ค้นหาเลขที่บิล เพื่อทำการดึงข้อมูล</label>
+			      	<div class="input-group">
+			      		<input type="text" name="search" class="form-control" id="search" placeholder="ค้นหา..." >
+			      		<div class="input-group-append">
+					    	<button class="btn btn-outline-info" name="search_stock" type="submit" id="button-addon2"><i class="fas fa-search"></i> ค้นหา</button>
+					  	</div>
+					  </div>
+			    </div>
+			    
+			</div>
+		</form>
+	</div>
+</div> -->
 <div class="card">
 	<form method="post" action="menu-income/submitforms1.php">
 	  	<div class="card-body">

@@ -1950,7 +1950,8 @@ $("#submit_report_income1").click(function () {
             { "title": "รายการรับ", "data": "type1" },
             { "title": "เงินสด/เช็ค/โอน", "data": "status_payment" },
             { "title": "คำอธิบายรายการ", "data": "list_income" },
-            { "title": "จำนวนเงิน", "data": "payment_total" }
+            { "title": "จำนวนเงิน", "data": "payment_total" },
+            { "title": "เพิ่มเติม", "data": "action" }
         ],
         "footerCallback": function (row, data, start, end, display) {
             var api = this.api(), data;
@@ -1986,6 +1987,9 @@ $("#submit_report_income1").click(function () {
                 "messageTop": '<h3 align="center">รายงานรายรับ</h3>',
                 "footer": true,
                 autoPrint: true,
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6]
+                },
                 customize: function (win) {
 
                     var last = null;
@@ -2041,7 +2045,8 @@ $("#submit_report_income2").click(function () {
             { "title": "รายการจ่าย", "data": "type1" },
             { "title": "เงินสด/เช็ค/โอน", "data": "status_payment" },
             { "title": "คำอธิบายรายการ", "data": "list_income" },
-            { "title": "จำนวนเงิน", "data": "payment_total" }
+            { "title": "จำนวนเงิน", "data": "payment_total" },
+            { "title": "เพิ่มเติม", "data": "action" }
         ],
         "footerCallback": function (row, data, start, end, display) {
             var api = this.api(), data;
@@ -2077,6 +2082,9 @@ $("#submit_report_income2").click(function () {
                 "messageTop": '<h3 align="center">รายงานรายจ่าย</h3>',
                 "footer": true,
                 autoPrint: true,
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6]
+                },
                 customize: function (win) {
 
                     var last = null;
@@ -2134,6 +2142,7 @@ $("#submit_report_income3").click(function () {
             { "title": "จำนวนเงิน", "data": "payment_total" },
             { "title": "สถานะเช็ค", "data": "cheque_status" },
             { "title": "วันที่เข้าบัญชี/เคลียร์เบี้ย", "data": "cheque_status_detail" },
+            { "title": "เพิ่มเติม", "data": "action" }
         ],
         dom: 'Bfrtip',
         "buttons": [
@@ -2146,6 +2155,9 @@ $("#submit_report_income3").click(function () {
                 "messageTop": '<h3 align="center">รายงานการรับเช็ค</h3>',
                 "footer": true,
                 autoPrint: true,
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                },
                 customize: function (win) {
 
                     var last = null;

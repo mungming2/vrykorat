@@ -85,7 +85,7 @@
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="?page=bill-forms1" class="sidebar-link"><i class="fas fa-genderless"></i><span class="hide-menu"> เรียกเก็บเงิน </span></a></li>
                                 <li class="sidebar-item"><a href="?page=bill-forms2" class="sidebar-link"><i class="fas fa-genderless"></i><span class="hide-menu"> ใบเสร็จรับเงิน </span></a></li>
-                                <li class="sidebar-item"><a href="?page=bill-forms3" class="sidebar-link"><i class="fas fa-genderless"></i><span class="hide-menu">  เรียกเก็บเงินลูกค้ากลุ่มและหน่วยงาน </span></a></li>
+                                <li class="sidebar-item"><a href="?page=bill-forms3" class="sidebar-link"><i class="fas fa-genderless"></i><span class="hide-menu">  เรียกเก็บเงินลูกค้ากลุ่ม... </span></a></li>
                             </ul>
                         </li>
                     <?php }elseif($value_get_menu == 7){ ?>

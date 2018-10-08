@@ -43,7 +43,7 @@ if($_GET['reports'] == 1){
     	$res_report[$key]['num'] = $key+1;
 		$getMsg = "คุณต้องการลบข้อมูลรายการรับจ่าย เลขที่ ".$value['bill_no']." ใช่หรือไม่?";
 		$res_report[$key]['action'] = '<a href="?page=income-edit1&search='.$res_report[$key]['id'].'"><i class="far fa-edit fa-2x pr-2 text-warning" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"></i></a>
-		<a href="menu-income/submitdelete.php?id='.$res_report[$key]['id'].'" onclick="return confirm(\''.$getMsg.'\')"><i class="fas fa-trash-alt fa-2x text-danger" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></i></a>
+		<a href="menu-income/submitdelete.php?id='.$res_report[$key]['id'].'&type=1" onclick="return confirm(\''.$getMsg.'\')"><i class="fas fa-trash-alt fa-2x text-danger" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></i></a>
 			';
 			
 	}
@@ -92,7 +92,7 @@ if($_GET['reports'] == 1){
     	$res_report[$key]['num'] = $key+1;
 		$getMsg = "คุณต้องการลบข้อมูลรายการรับจ่าย เลขที่ ".$value['bill_no']." ใช่หรือไม่?";
 		$res_report[$key]['action'] = '<a href="?page=income-edit1&search='.$res_report[$key]['id'].'"><i class="far fa-edit fa-2x pr-2 text-warning" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"></i></a>
-		<a href="menu-income/submitdelete.php?id='.$res_report[$key]['id'].'" onclick="return confirm(\''.$getMsg.'\')"><i class="fas fa-trash-alt fa-2x text-danger" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></i></a>
+		<a href="menu-income/submitdelete.php?id='.$res_report[$key]['id'].'&type=2" onclick="return confirm(\''.$getMsg.'\')"><i class="fas fa-trash-alt fa-2x text-danger" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></i></a>
 			';
 			
 	}
@@ -140,7 +140,7 @@ END AS cheque_status, cheque_status_detail FROM cheque"
     	$res_report[$key]['num'] = $key+1;
 		$getMsg = "คุณต้องการลบข้อมูลรายการรับเช็ค เลขที่ ".$value['stock_id']." ใช่หรือไม่?";
 		$res_report[$key]['action'] = '<a href="?page=income-edit2&search='.$res_report[$key]['id'].'"><i class="far fa-edit fa-2x pr-2 text-warning" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"></i></a>
-		<a href="menu-income/submitdelete.php?id='.$res_report[$key]['id'].'" onclick="return confirm(\''.$getMsg.'\')"><i class="fas fa-trash-alt fa-2x text-danger" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></i></a>
+		<a href="menu-income/submitdelete.php?id='.$res_report[$key]['id'].'&type=3" onclick="return confirm(\''.$getMsg.'\')"><i class="fas fa-trash-alt fa-2x text-danger" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"></i></a>
 			';
 			
 	}

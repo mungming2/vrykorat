@@ -54,6 +54,7 @@
 			            	<th colspan="5"></th>
 			                <th  style="text-align:right"><b>รวมเงิน:</b></th>
 			                <th ></th>
+							<th ></th>
 			            </tr>
 			        </tfoot>
 				</table>

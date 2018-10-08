@@ -74,9 +74,11 @@ foreach ($res_report as $key => $value) {
         }
         
     }
-    
 }
-
+$sum = 0;
+foreach ($arr_sum as $key_arr_sum => $value_arr_sum) {
+    $sum += $value_arr_sum['sum_balance'];
+}
 
 ?>
 <!DOCTYPE html>
@@ -142,9 +144,15 @@ foreach ($res_report as $key => $value) {
                     รวมเงินส่งเบี้ย<b class="mx-4"><?=number_format($arr_sum[$key_car]['sum_balance'],2)?> บาท </b></p>
                 </div>	
             <?php } ?>
+                <div class="col-8 offset-4 mt-3">
+                    <p>ค่าปรับล่าช้า <input type="text" class="form-control-static" name="fine" id="fine" placeholder="ระบุ"> บาท</p>
+                </div>	
+                <div class="col-8 offset-4">
+                    <p>รวมยอดเงินนำส่งสุทธิ <b class="mx-4"><?=number_format($sum,2)?> บาท </b></p>
+                </div>	
             
         </div>
-        <iframe src="print_form5.php?agent=<?=$agent?>&select_date=<?=$dateRange?>" name="frame5" style="width:0; height:0; border:0; border:none"></iframe>
+        <iframe src="print_form5.php?agent=<?=$agent?>&select_date=<?=$dateRange?>" name="frame5" id="frame5" style="width:0; height:0; border:0; border:none"></iframe>
 
         <script src="../matrix-admin/assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="../matrix-admin/assets/libs/jquery/dist/jquery.highlight.js"></script>
@@ -187,7 +195,12 @@ foreach ($res_report as $key => $value) {
 
 
             function print(){
-                frames['frame1'].print();
+                var fine = $('#fine').val();
+                var url = 'print_form5.php?agent=<?=$agent?>&select_date=<?=$dateRange?>&fine='+fine;
+                $('#frame5').attr('src', url);
+                var frame1 = $("#frame5").contents();
+                frame1.find('#get_fine').html(fine);
+                frames['frame5'].print();
             }
         </script>
     </body>

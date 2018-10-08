@@ -206,6 +206,10 @@
             include("menu-bill/forms2.php");
             echo "<script>document.getElementById('header_name').innerHTML='ฟอร์มพิมพ์ใบเสร็จรับเงิน';</script>";
             break;
+        case "bill-forms2":
+            include("menu-bill/forms3.php");
+            echo "<script>document.getElementById('header_name').innerHTML='ฟอร์มพิมพ์เอกสารเรียกเก็บเงินลูกค้ากลุ่มและหน่วยงาน';</script>";
+            break;
         default:
 			include("menu-stock/forms.php");
           	echo "<script>document.getElementById('header_name').innerHTML='แบบฟอร์มต่างๆ';</script>";

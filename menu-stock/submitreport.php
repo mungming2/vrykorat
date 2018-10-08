@@ -189,6 +189,91 @@ if($_GET['reports'] == 1){
 	//echo '</pre>';
 
 }elseif ($_GET['reports'] == 6) {
+	$dateRange = $_GET['select_date'];
+	$selectagent = $_GET['selectagent'];
+	$sql_code = '';
+	if($selectagent != 'all'){
+		$sql_code = " AND code = '$selectagent' ";
+	}
+
+	$sql_report = "SELECT * from (
+		(SELECT *, stock_total - (stock_use + stock_cancel) as stock_remain
+		, (
+		SELECT concat(left(min(a.barcode),12) + 1,'0') AS sstart
+		FROM insure_payment2 AS a, insure_payment2 AS b
+		WHERE a.barcode < b.barcode
+		GROUP BY a.barcode
+		HAVING sstart < MIN(b.barcode) and a.barcode between tblTemp.index_start and tblTemp.index_end
+		order by sstart desc
+		LIMIT 1
+		) as remain_start
+			
+		, if(stock_use_end is not null, if(index_end = stock_use_end, null, index_end), tblTemp.index_end) as remain_end ,
+		CONCAT((
+		SELECT concat(left(min(a.barcode),12) + 1,'0') AS sstart
+		FROM insure_payment2 AS a, insure_payment2 AS b
+		WHERE a.barcode < b.barcode
+		GROUP BY a.barcode
+		HAVING sstart < MIN(b.barcode) and a.barcode between tblTemp.index_start and tblTemp.index_end
+		order by sstart desc
+		LIMIT 1
+		)	,'-'
+		, if(stock_use_end is not null, if(index_end = stock_use_end, null, index_end), tblTemp.index_end)) AS remain_start_end
+		
+		 from (
+		SELECT datetime, index_start, index_end, CONCAT(index_start,'-', index_end) AS index_start_end, stock_total, (SELECT concat(uc.code, ' - ', name, ' ', surname) from user_code uc where uc.code = sm.code LIMIT 1) as code
+		, (SELECT min(barcode) from insure_payment2 where barcode between sm.index_start and sm.index_end) stock_use_start
+		, (SELECT max(barcode) from insure_payment2 where barcode between sm.index_start and sm.index_end) stock_use_end
+		, CONCAT((SELECT min(barcode) from insure_payment2 where barcode between sm.index_start and sm.index_end) ,'-'
+		, (SELECT max(barcode) from insure_payment2 where barcode between sm.index_start and sm.index_end) ) AS stock_use_start_end
+		, (SELECT count(distinct barcode) from insure_payment2 where barcode between sm.index_start and sm.index_end) stock_use
+		, ifnull((SELECT stock_total from stock_use su where (su.stock_start between sm.stock_start and sm.stock_end) and (su.stock_end between sm.stock_start and sm.stock_end) and status > 1),0) 
+		+ ifnull((SELECT stock_total from stock_use su where (su.stock_start between sm.stock_start and sm.stock_end) and (su.stock_end between sm.stock_start and sm.stock_end) and status = 1),0) stock_cancel
+		FROM stock_main sm where datetime = '$dateRange' and type <> 0".$sql_code."
+		) tblTemp)
+		union
+		(SELECT *, stock_total - (stock_use + stock_cancel) as stock_remain
+		, (
+		SELECT min(a.stock_id) + 1 AS sstart
+		FROM insure_payment AS a, insure_payment AS b
+		WHERE a.stock_id < b.stock_id
+		GROUP BY a.stock_id
+		HAVING sstart < MIN(b.stock_id) and a.stock_id between tblTemp.index_start and tblTemp.index_end
+		LIMIT 1
+		) as remain_start
+			
+		, if(stock_use_end is not null, if(index_end = stock_use_end, null, index_end), null) as remain_end
+		, CONCAT((
+			SELECT min(a.stock_id) + 1 AS sstart
+			FROM insure_payment AS a, insure_payment AS b
+			WHERE a.stock_id < b.stock_id
+			GROUP BY a.stock_id
+			HAVING sstart < MIN(b.stock_id) and a.stock_id between tblTemp.index_start and tblTemp.index_end
+			LIMIT 1
+		),'-'	
+			, if(stock_use_end is not null, if(index_end = stock_use_end, null, index_end), null)) AS remain_start_end
+		 from (
+		SELECT datetime, stock_start as index_start, stock_end as index_end,CONCAT(stock_start,'-', stock_end) AS index_start_end, stock_total, concat(agent_id,' - ', agent_name) as code
+		, (SELECT min(stock_id) from insure_payment where stock_id between sr.stock_start and sr.stock_end) stock_use_start
+		, (SELECT max(stock_id) from insure_payment where stock_id between sr.stock_start and sr.stock_end) stock_use_end
+		, CONCAT( (SELECT min(stock_id) from insure_payment where stock_id between sr.stock_start and sr.stock_end),'-'
+		, (SELECT max(stock_id) from insure_payment where stock_id between sr.stock_start and sr.stock_end) ) AS stack_use_start_end 
+		, (SELECT count(distinct stock_id) from insure_payment where stock_id between sr.stock_start and sr.stock_end) stock_use
+		, ifnull((SELECT stock_total from stock_use su where (su.stock_start between sr.stock_start and sr.stock_end) and (su.stock_end between sr.stock_start and sr.stock_end) and status > 1),0) 
+		+ ifnull((SELECT stock_total from stock_use su where (su.stock_start between sr.stock_start and sr.stock_end) and (su.stock_end between sr.stock_start and sr.stock_end) and status = 1),0) stock_cancel
+		FROM stock_request sr where datetime = '$dateRange' and type = 0".$sql_code."
+		) tblTemp) ) tbl order by datetime, code, index_start
+		";
+	$query_report = mysqli_query($conn,$sql_report);
+	$res_report = mysqli_fetch_all($query_report,MYSQLI_ASSOC);
+	foreach ($res_report as $key => $value) { 
+		$res_report[$key]['num'] = $key+1;
+	}
+	$getJson['data'] = $res_report;
+
+	//echo '<pre>';
+	print_r(json_encode( $getJson));
+	//echo '</pre>';
 	
 }elseif ($_GET['reports'] == 7) {
 	$dateRange = $_GET['select_date'];

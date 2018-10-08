@@ -18,7 +18,6 @@
 	}else{ 
 		$getStockId = $_POST['search'];
 	} 
-	
 
 	$sql_get_stock = "SELECT  no, index_id, year_stock, stock_id, stock_type, inform_id, cus_title, cus_firstname, cus_lastname, cus_type, cus_card_id, cus_address, cus_tel, cus_type2, cus_detail, cus_status, cus_status_stock, car_id, car_number, car_province, car_cc_weight_seat, car_brand, car_color, car_chassis, car_body, insure_type, insure_date, DATE_FORMAT(insure_time,'%H:%i') AS insure_time, insure_total1, insure, insure_net, insure_duty, insure_tex, insure_total2, stock_date, tex_date, receive_date, payment_date, cancel_date, create_date, account_date, cus_pay_date, clear_date , cancel_detail
 	FROM insure_payment WHERE stock_id = '$getStockId' or car_number = '$getStockId'";

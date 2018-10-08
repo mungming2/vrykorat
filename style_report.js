@@ -255,18 +255,60 @@ $("#submit_report6").click(function () {
         },
         "ajax": {
             "url": "menu-stock/submitreport.php?reports=6&" + serializedData
-        }//,
-        // "columns": [
-        //     { "data": "no" },
-        //     { "data": "update_date" },
-        //     { "data": "datetime" },
-        //     { "data": "agent_id" },
-        //     { "data": "agent_name" },
-        //     { "data": "status" },
-        //     { "data": "stock_all" },
-        //     { "data": "stock_total" },
-        //     { "data": "action" }
-        // ]
+        },
+        "columns": [
+            { "data": "num" },
+            { "data": "datetime" },
+            { "data": "index_start_end" },
+            { "data": "stock_total" },
+            { "data": "code" },
+            { "data": "stock_use_start_end" },
+            { "data": "stock_use" },
+            { "data": "stock_cancel" },
+            { "data": "stock_remain" },
+            { "data": "remain_start_end" }
+        ],
+        dom: 'Bfrtip',
+        "buttons": [
+            {
+                "extend": 'print',
+                "className": 'btn btn-info',
+                "orientation": 'landscape',
+                "text": 'สั่งพิมพ์',
+                "title": '',
+                "messageTop": '<h4 align="center">รายงานสต็อกรายวัน</h4>',
+                "footer": true,
+                autoPrint: true,
+                customize: function (win) {
+
+                    var last = null;
+                    var current = null;
+                    var bod = [];
+
+                    var css = '@page { size: landscape;}',
+                        head = win.document.head || win.document.getElementsByTagName('head')[0],
+                        style = win.document.createElement('style');
+
+                    style.type = 'text/css';
+                    style.media = 'print';
+
+                    if (style.styleSheet) {
+                        style.styleSheet.cssText = css;
+                    }
+                    else {
+                        style.appendChild(win.document.createTextNode(css));
+                    }
+
+                    head.appendChild(style);
+                    $(win.document.body).css('font-size', '8pt');
+
+                    $(win.document.body).find('table')
+                        .removeClass('dataTable')
+                        .css('font-size', 'inherit');
+
+                }
+            }
+        ]
     });
 });
 
@@ -1396,7 +1438,7 @@ $("#submit_report_other2").click(function () {
                     "orientation": 'landscape',
                     "text": 'สั่งพิมพ์',
                     "title": '',
-                    "messageTop": '<h3>รายงานใบเตือนต่ออายุ ( พรบ. )</h3>',
+                    "messageTop": '<h3>รายงานเคลียร์เบี้ย ( พรบ. )</h3>',
                     "footer": true,
                     autoPrint: true,
                     customize: function (win) {
@@ -1485,7 +1527,7 @@ $("#submit_report_other2").click(function () {
                     "orientation": 'landscape',
                     "text": 'สั่งพิมพ์',
                     "title": '',
-                    "messageTop": '<h3>รายงานใบเตือนต่ออายุ ( พรบ. )</h3>',
+                    "messageTop": '<h3>รายงานเคลียร์เบี้ย ( สมัครใจ )</h3>',
                     "footer": true,
                     autoPrint: true,
                     customize: function (win) {
@@ -1574,7 +1616,282 @@ $("#submit_report_other2").click(function () {
                     "orientation": 'landscape',
                     "text": 'สั่งพิมพ์',
                     "title": '',
-                    "messageTop": '<h3>รายงานใบเตือนต่ออายุ ( พรบ. )</h3>',
+                    "messageTop": '<h3>รายงานเคลียร์เบี้ย ( เบ็ดเตล็ด )</h3>',
+                    "footer": true,
+                    autoPrint: true,
+                    customize: function (win) {
+
+                        var last = null;
+                        var current = null;
+                        var bod = [];
+
+                        var css = '@page { size: landscape;}',
+                            head = win.document.head || win.document.getElementsByTagName('head')[0],
+                            style = win.document.createElement('style');
+
+                        style.type = 'text/css';
+                        style.media = 'print';
+
+                        if (style.styleSheet) {
+                            style.styleSheet.cssText = css;
+                        }
+                        else {
+                            style.appendChild(win.document.createTextNode(css));
+                        }
+
+                        head.appendChild(style);
+                        $(win.document.body).css('font-size', '8pt');
+
+                        $(win.document.body).find('table')
+                            .removeClass('dataTable')
+                            .css('font-size', 'inherit');
+
+                    }
+                }
+            ]
+        });
+    }
+});
+
+$("#submit_report_other3").click(function () {
+    var serializedData = $("#form_report").serialize();
+    if (count > 0) { tableReport.destroy(); }
+    count++;
+
+    console.log("menu-report/submitreport3.php?" + serializedData);
+    if ($('#report_type1').is(':checked')) {
+        $('#showTable1').show();
+        $('#showTable2').hide();
+        $('#showTable3').hide();
+        tableReport = $('#report_other1').DataTable({
+            "scrollX": true,
+            "language": {
+                "url": "matrix-admin/assets/libs/datatables.net-bs4/Thai.json"
+            },
+            "ajax": {
+                "url": "menu-report/submitreport3.php?" + serializedData
+            },
+            "columns": [
+                { "title": "ลำดับ", "data": "num" },
+                { "title": "เลขที่กรมธรรม์", "data": "stock_id" },
+                { "title": "วันคุ้มครอง", "data": "insure_date" },
+                { "title": "วันที่ทำกรมธรรม์", "data": "stock_date" },
+                { "title": "ผู้เอาประกัน", "data": "cus_name" },
+                { "title": "เบี้ยสุทธิ์", "data": "insure_net" },
+                { "title": "เบี้ยรวม", "data": "insure_total3" },
+                { "title": "ตัวแทน", "data": "cus_type2" },
+                { "title": "วันชำระเงิน", "data": "cus_pay_date" }
+            ],
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+                // Total over all pages
+                total = api
+                    .column(6)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+    
+                // Update footer
+                $(api.column(6).footer()).html(
+                    numberWithCommas(total.toFixed(2)) + ' บาท'
+                );
+                getTotal = '<b>รวมเงิน: </b>' + numberWithCommas(total.toFixed(2)) + ' บาท';
+            },
+            dom: 'Bfrtip',
+            "buttons": [
+                {
+                    "extend": 'print',
+                    "className": 'btn btn-info',
+                    "orientation": 'landscape',
+                    "text": 'สั่งพิมพ์',
+                    "title": '',
+                    "messageTop": '<h3>รายงานเจ้าหนี้ ( พรบ. )</h3>',
+                    "footer": true,
+                    autoPrint: true,
+                    customize: function (win) {
+
+                        var last = null;
+                        var current = null;
+                        var bod = [];
+
+                        var css = '@page { size: landscape;}',
+                            head = win.document.head || win.document.getElementsByTagName('head')[0],
+                            style = win.document.createElement('style');
+
+                        style.type = 'text/css';
+                        style.media = 'print';
+
+                        if (style.styleSheet) {
+                            style.styleSheet.cssText = css;
+                        }
+                        else {
+                            style.appendChild(win.document.createTextNode(css));
+                        }
+
+                        head.appendChild(style);
+                        $(win.document.body).css('font-size', '8pt');
+
+                        $(win.document.body).find('table')
+                            .removeClass('dataTable')
+                            .css('font-size', 'inherit');
+
+                    }
+                }
+            ]
+        });
+    }else if ($('#report_type2').is(':checked')) {
+        $('#showTable1').hide();
+        $('#showTable2').show();
+        $('#showTable3').hide();
+        tableReport = $('#report_other2').DataTable({
+            "scrollX": true,
+            "language": {
+                "url": "matrix-admin/assets/libs/datatables.net-bs4/Thai.json"
+            },
+            "ajax": {
+                "url": "menu-report/submitreport2.php?" + serializedData
+            },
+            "columns": [
+                { "title": "ลำดับ", "data": "num" },
+                { "title": "ประเภทรถ", "data": "stock_type" },
+                { "title": "เลขที่กรมธรรม์", "data": "stock_id" },
+                { "title": "วันคุ้มครอง", "data": "insure_date" },
+                { "title": "วันที่รับแจ้ง", "data": "stock_date" },
+                { "title": "ผู้เอาประกัน", "data": "cus_name" },
+                { "title": "เบี้ยสุทธิ์", "data": "insure_net" },
+                { "title": "เบี้ยรวม", "data": "insure_total3" },
+                { "title": "ตัวแทน", "data": "cus_type2" },
+                { "title": "วันชำระเงิน", "data": "cus_pay_date" }
+            ],
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+                // Total over all pages
+                total = api
+                    .column(7)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+    
+                // Update footer
+                $(api.column(7).footer()).html(
+                    numberWithCommas(total.toFixed(2)) + ' บาท'
+                );
+                getTotal = '<b>รวมเงิน: </b>' + numberWithCommas(total.toFixed(2)) + ' บาท';
+            },
+            dom: 'Bfrtip',
+            "buttons": [
+                {
+                    "extend": 'print',
+                    "className": 'btn btn-info',
+                    "orientation": 'landscape',
+                    "text": 'สั่งพิมพ์',
+                    "title": '',
+                    "messageTop": '<h3>รายงานเจ้าหนี้ ( สมัครใจ )</h3>',
+                    "footer": true,
+                    autoPrint: true,
+                    customize: function (win) {
+
+                        var last = null;
+                        var current = null;
+                        var bod = [];
+
+                        var css = '@page { size: landscape;}',
+                            head = win.document.head || win.document.getElementsByTagName('head')[0],
+                            style = win.document.createElement('style');
+
+                        style.type = 'text/css';
+                        style.media = 'print';
+
+                        if (style.styleSheet) {
+                            style.styleSheet.cssText = css;
+                        }
+                        else {
+                            style.appendChild(win.document.createTextNode(css));
+                        }
+
+                        head.appendChild(style);
+                        $(win.document.body).css('font-size', '8pt');
+
+                        $(win.document.body).find('table')
+                            .removeClass('dataTable')
+                            .css('font-size', 'inherit');
+
+                    }
+                }
+            ]
+        });
+    }else {
+        $('#showTable1').hide();
+        $('#showTable2').hide();
+        $('#showTable3').show();
+        tableReport = $('#report_other3').DataTable({
+            "scrollX": true,
+            "language": {
+                "url": "matrix-admin/assets/libs/datatables.net-bs4/Thai.json"
+            },
+            "ajax": {
+                "url": "menu-report/submitreport2.php?" + serializedData
+            },
+            "columns": [
+                { "title": "ลำดับ", "data": "num" },
+                { "title": "ประเภทประกัน", "data": "insure_type" },
+                { "title": "เลขที่กรมธรรม์", "data": "stock_id" },
+                { "title": "วันคุ้มครอง", "data": "insure_date" },
+                { "title": "วันที่รับแจ้ง", "data": "stock_date" },
+                { "title": "ผู้เอาประกัน", "data": "cus_name" },
+                { "title": "เบี้ยสุทธิ์", "data": "insure_net" },
+                { "title": "เบี้ยรวม", "data": "insure_total2" },
+                { "title": "ตัวแทน", "data": "cus_type" },
+                { "title": "วันชำระเงิน", "data": "cus_pay_date" }
+            ],
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+                // Total over all pages
+                total = api
+                    .column(7)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+    
+                // Update footer
+                $(api.column(7).footer()).html(
+                    numberWithCommas(total.toFixed(2)) + ' บาท'
+                );
+                getTotal = '<b>รวมเงิน: </b>' + numberWithCommas(total.toFixed(2)) + ' บาท';
+            },
+            dom: 'Bfrtip',
+            "buttons": [
+                {
+                    "extend": 'print',
+                    "className": 'btn btn-info',
+                    "orientation": 'landscape',
+                    "text": 'สั่งพิมพ์',
+                    "title": '',
+                    "messageTop": '<h3>รายงานเจ้าหนี้ ( เบ็ดเตล็ด )</h3>',
                     "footer": true,
                     autoPrint: true,
                     customize: function (win) {

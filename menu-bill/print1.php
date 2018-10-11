@@ -14,6 +14,20 @@
 	   		margin: 0mm;  /* this affects the margin in the printer settings */
         }
 	</style>
+    <style>
+        .getPayment {
+            border-bottom-style: dotted;
+            border-bottom-width: thin; 
+            padding-right:250px;
+            position: relative;
+        }
+        .getPayment2 {
+            border-bottom-style: dotted;
+            border-bottom-width: thin; 
+            padding-right:350px;
+            position: relative;
+        }
+    </style>
 </head>
 <body >
 	<div class="container-fluid mt-4">
@@ -110,30 +124,43 @@
                 </div>
                 <div class="col-12 my-4">
                     <p class="lead py-2">ลงชื่อ<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:350px;"> </small>ผู้รับเอกสาร</p>
-                    <p class="lead py-2">ชำระโดย เงินสด<span style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;position: relative;"> <span id="get_value_total22" style="right: 50%;position: absolute;"> </span></span>บาท</p>
+                    <p class="lead py-4">ชำระโดย เงินสด<span class="getPayment">
+                        <span id="get_value_total2" style="left: 20%;position: absolute;"> </span></span>บาท
+                    </p>
                     <p class="lead pb-3">
                         <span id="print_form3_2"></span> 
                         <span id="print_form4_2"></span>
                     </p>
                     <p class="lead pb-2">
-                        เช็คธนาคาร<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
-                        สาขา<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
-                        ลงวันที่<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
+                        เช็คธนาคาร<span class="getPayment">
+                            <span id="get_value_bank2" style="left: 20%;position: absolute;"> </span></span>
+                        สาขา<span class="getPayment">
+                            <span id="get_value_branch2" style="left: 20%;position: absolute;"> </span></span>
+                        ลงวันที่<span class="getPayment">
+                            <span id="get_value_date2" style="left: 20%;position: absolute;"> </span></span>
                     </p>
-                    <p class="lead pb-3">
-                        เลขที่เช็ค<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
-                        จำนวนเงิน<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>บาท
+                    <p class="lead pb-4">
+                        เลขที่เช็ค<span class="getPayment2">
+                            <span id="get_value_cheque2" style="left: 20%;position: absolute;"> </span></span>
+                        จำนวนเงิน<span class="getPayment">
+                            <span id="get_value_total2_2" style="left: 20%;position: absolute;"> </span></span>บาท
+                    </p>
+                    <p class="lead pb-4">
+                        โอน<span class="getPayment">
+                            <span id="get_value_total2_3" style="left: 20%;position: absolute;"> </span></span>บาท
                     </p>
                     <p class="lead pb-2">
-                        โอน<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>บาท
+                        บัตรเครดิต<span class="getPayment">
+                            <span id="get_value_bank4" style="left: 20%;position: absolute;"> </span></span>
+                        ประเภทบัตร <span class="getPayment2">
+                            <span id="get_value_type4" style="left: 20%;position: absolute;"> </span></span>
+                        
                     </p>
-                    <p class="lead pb-2">
-                        บัตรเครดิต<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
-                        VISA / <small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
-                        เลขที่บัตร<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
-                    </p>
-                    <p class="lead pb-2">
-                        จำนวนเงิน<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>บาท
+                    <p class="lead pb-4">
+                        เลขที่บัตร<span class="getPayment2">
+                            <span id="get_value_num4" style="left: 20%;position: absolute;"> </span></span>
+                        จำนวนเงิน<span class="getPayment">
+                            <span id="get_value_total2_4" style="left: 20%;position: absolute;"> </span></span>บาท
                     </p>
                 </div>
                 <div class="col-8">

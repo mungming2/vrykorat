@@ -64,11 +64,13 @@ if($type == 2){
     $table = " FROM insure_payment2 i LEFT JOIN payment p ON i.no = p.stock_id AND p.form_type = '2'"; 
 }
 $table2 = " FROM insure_payment2 i LEFT JOIN payment p ON i.no = p.stock_id AND p.form_type = '2'";
+$where_table = '';
 if($type == 2){ 
     $table2 = " FROM insure_payment i LEFT JOIN payment p ON i.stock_id = p.stock_id"; 
+    $where_table = " AND form_type = '2' ";
 }
 if($_GET['forms'] == 1){
-	$sql_check = "SELECT p.stock_id,p.total_amount,p.count,p.discount AS p_discount,p.tax_deductions AS p_tax_deductions,p.balance AS p_balance,p.cus_pay_date AS p_payment_date,i.no, i.stock_id, stock_type, inform_id, CONCAT(cus_title, cus_firstname,' ', cus_lastname) AS cus_name, cus_type, cus_card_id, i.insure_date, cus_status, cus_status_stock, car_number, car_brand, car_province, car_chassis, insure, insure_net, insure_duty, insure_tex, insure_total2, p.cus_pay_date, 
+	$sql_check = "SELECT no,p.stock_id,p.total_amount,MAX(p.count) AS count,p.discount AS p_discount,p.tax_deductions AS p_tax_deductions,p.balance AS p_balance,p.cus_pay_date AS p_payment_date,i.no, i.stock_id, stock_type, inform_id, CONCAT(cus_title, cus_firstname,' ', cus_lastname) AS cus_name, cus_type, cus_card_id, i.insure_date, cus_status, cus_status_stock, car_number, car_brand, car_province, car_chassis, insure, insure_net, insure_duty, insure_tex, insure_total2, p.cus_pay_date, 
     CASE cus_type2 WHEN 'ตัวแทน' THEN (SELECT name FROM agent WHERE agent_id = i.cus_detail)
         ELSE ''
     END AS cus_type2, p.bill_no 
@@ -78,9 +80,28 @@ if($_GET['forms'] == 1){
     $row_check = mysqli_num_rows($query_check);
     $res_check = mysqli_fetch_array($query_check,MYSQLI_ASSOC);
 
+    $where_table = " stock_id = '".$res_check['stock_id']."'";
+    if($type == 2){ 
+        $where_table = " stock_id = '".$res_check['no']."' AND form_type = '2' ";
+    }
+   
+
     $arr_stock = [];
     $_total_amount = 0;
     if($row_check == 1){
+        $sql_check_payment = "SELECT id, MAX(count) AS count, form_type, payment_type, type, bank, bank_branch, total, payment_number, payment_date, cheque_date, card_type1, card_type2, exp_date, name, relation_name, tel, arrears
+        FROM payment WHERE ".$where_table;
+        $query_check_payment = mysqli_query($conn,$sql_check_payment);
+        $row_check_payment = mysqli_num_rows($query_check_payment);
+        $arr_check['payment'] = mysqli_fetch_all($query_check_payment,MYSQLI_ASSOC);
+        if(empty($row_check_payment['count'])){
+            $arr_check['count_payment'] = 0;
+        }else{
+            $arr_check['count_payment'] = $row_check_payment;
+        }
+        
+
+
         $arr_check['stock_id'] = $res_check['stock_id'];
         $arr_check['bill_no'] = $res_check['bill_no'];
         $arr_check['cus_name'] = $res_check['cus_name'];

@@ -10,7 +10,7 @@
     $where_date = " AND stock_date BETWEEN DATE('$dateRangeArry[0]') AND DATE('$dateRangeArry[1]')";
 }
 
- $sql_report = "SELECT i.index_id, year_stock, i.stock_id, stock_type, inform_id, CONCAT(cus_title, cus_firstname,' ', cus_lastname) AS cus_name, cus_type2, cus_detail, cus_status, cus_status_stock, i.car_id, c.code,  car_number, car_province, insure_type, insure_date, insure_time, insure_total1, i.insure, insure_net, insure_duty, insure_tex, insure_total2, DATE_FORMAT(stock_date, '%d/%m/%Y') AS stock_date ,p.balance, a.rate, a.decimal_point
+ $sql_report = "SELECT i.index_id, year_stock, i.stock_id, stock_type, inform_id, CONCAT(cus_title, cus_firstname,' ', cus_lastname) AS cus_name, cus_type2, cus_detail, cus_status, cus_status_stock, i.car_id, c.code,  car_number, car_province, insure_type, insure_date, insure_time, insure_total1, i.insure, insure_net, insure_duty, insure_tex, insure_total2, DATE_FORMAT(stock_date, '%d/%m/%Y') AS stock_date ,p.balance, a.rate, a.decimal_point, p.total_amount, p.discount, p.tax_deductions
             FROM insure_payment i
             LEFT JOIN agent a
             ON i.cus_detail = a.agent_id
@@ -41,7 +41,8 @@ $sum_balance = 0;
 $arr_sum = [];
 foreach ($res_report as $key => $value) {
     // คำนวน เบี้ยสุทธิ x ค่าคอมมิชชั่น
-    $sum_rate = $value['insure_net']*($value['rate']/100);
+    // $sum_rate = $value['insure_net']*($value['rate']/100);
+    $sum_rate = $value['discount'];
 
     // เช็ค ตัดจุดทศนิยม
     if($value['decimal_point'] == 'yes'){
@@ -51,7 +52,7 @@ foreach ($res_report as $key => $value) {
     }
 
     // คำนวน เบี้ยรวม - ค่าคอมมิชชั่นที่คำนวนแล้ว
-    $res_report[$key]['balance'] = $value['insure_total2']-$res_report[$key]['sum_rate'];
+    // $res_report[$key]['balance'] = $value['insure_total2']-$res_report[$key]['sum_rate'];
     $rate = $value['rate'];
 
     foreach ($res_car as $key_car1 => $value_car1) {
@@ -111,6 +112,7 @@ foreach ($arr_sum as $key_arr_sum => $value_arr_sum) {
                     <th>เบี้ยรวม</th>
                     <th>อากร</th>
                     <th>คอมมิชชั่น (<?=$rate?>%)</th>
+                    <th>หักภาษี 1%</th>
                     <th>เงินส่งเบี้ย</th>
                 </tr>
             </thead>
@@ -126,6 +128,7 @@ foreach ($arr_sum as $key_arr_sum => $value_arr_sum) {
                         <td><?=$value_['insure_total2']?></td>
                         <td><?=$value_['insure_duty']?></td>
                         <td><?=$value_['sum_rate']?></td>
+                        <td><?=$value_['tax_deductions']?></td>
                         <td><?=$value_['balance']?></td>
                     </tr>
                 <?php } ?>

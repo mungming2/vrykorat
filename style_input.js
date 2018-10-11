@@ -368,7 +368,7 @@ $("#stock_id_print").on('click', function (event) {
             $("#load_card").hide();
         },
     }).done(function (result) {
-        console.log(result);
+        //console.log(result);
         $('#check_stock_id').html('');
         if (result == 0) {
             $('#check_stock_id').html('<div class="text-danger">ไม่พบเลขกรมธรรม์ / ทะเบียนรถ / เลขตัวถังรถ</div>');
@@ -411,8 +411,70 @@ $("#stock_id_print").on('click', function (event) {
                     $('#get_value_agent').html('ชื่อตัวแทน (ถ้ามี) '+result.cus_type2);
                 }
                 $('#get_value_total').html(result.total);
-                if(result.total != '0.00'){
-                    $('#get_value_total2').html(result.total);
+                // if(result.total != '0.00'){
+                //     $('#get_value_total2').html(result.total);
+                // }
+                console.log(result.payment.length);
+                $('#get_value_total2').html('');
+                $('#get_value_total2_2').html('');
+                $('#get_value_bank2').html('');
+                $('#get_value_branch2').html('');
+                $('#get_value_date2').html('');
+                $('#get_value_cheque2').html('');
+                $('#get_value_total2_3').html('');
+                $('#get_value_total2_4').html('');
+                $('#get_value_bank4').html('');
+                $('#get_value_type4').html('');
+                $('#get_value_num4').html('');
+
+                frame1.find('#get_value_total2').html('');
+                frame1.find('#get_value_total2_2').html('');
+                frame1.find('#get_value_bank2').html('');
+                frame1.find('#get_value_branch2').html('');
+                frame1.find('#get_value_date2').html('');
+                frame1.find('#get_value_cheque2').html('');
+                frame1.find('#get_value_total2_3').html('');
+                frame1.find('#get_value_total2_4').html('');
+                frame1.find('#get_value_bank4').html('');
+                frame1.find('#get_value_type4').html('');
+                frame1.find('#get_value_num4').html('');
+                for (var index = 0; index < result.payment.length; index++) {
+                    console.log(result.payment[0].total);
+                    if(result.payment[index].payment_type == '1') {
+                        $('#get_value_total2').html(result.payment[index].total );
+
+                        frame1.find('#get_value_total2').html(result.payment[index].total );
+                    }
+                    if(result.payment[index].payment_type == '2') {
+                        $('#get_value_total2_2').html(result.payment[index].total );
+                        $('#get_value_bank2').html(result.payment[index].bank );
+                        $('#get_value_branch2').html(result.payment[index].bank_branch );
+                        $('#get_value_date2').html(result.payment[index].cheque_date );
+                        $('#get_value_cheque2').html(result.payment[index].payment_number );
+
+                        frame1.find('#get_value_total2_2').html(result.payment[index].total );
+                        frame1.find('#get_value_bank2').html(result.payment[index].bank );
+                        frame1.find('#get_value_branch2').html(result.payment[index].bank_branch );
+                        frame1.find('#get_value_date2').html(result.payment[index].cheque_date );
+                        frame1.find('#get_value_cheque2').html(result.payment[index].payment_number );
+                    }
+                    if(result.payment[index].payment_type == '3') {
+                        $('#get_value_total2_3').html(result.payment[index].total );
+
+                        frame1.find('#get_value_total2_3').html(result.payment[index].total );
+                    }
+                    if(result.payment[index].payment_type == '4') {
+                        $('#get_value_total2_4').html(result.payment[index].total );
+                        $('#get_value_bank4').html(result.payment[index].bank );
+                        $('#get_value_type4').html(result.payment[index].card_type1+' / '+ result.payment[index].card_type2);
+                        $('#get_value_num4').html(result.payment[index].payment_number );
+
+                        frame1.find('#get_value_total2_4').html(result.payment[index].total );
+                        frame1.find('#get_value_bank4').html(result.payment[index].bank );
+                        frame1.find('#get_value_type4').html(result.payment[index].card_type1+' / '+ result.payment[index].card_type2);
+                        frame1.find('#get_value_num4').html(result.payment[index].payment_number );
+                    }
+                    
                 }
                 
                 $('#get_value_total_convert').html('( ' + result.total_convert + ' )');

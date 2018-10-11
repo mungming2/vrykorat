@@ -1,9 +1,24 @@
+<style>
+    .getPayment {
+        border-bottom-style: dotted;
+        border-bottom-width: thin; 
+        padding-right:250px;
+        position: relative;
+    }
+    .getPayment2 {
+        border-bottom-style: dotted;
+        border-bottom-width: thin; 
+        padding-right:350px;
+        position: relative;
+    }
+</style>
 <div class="card">
-	<div class="card-body">
+    <div class="card-body">
         <div class="form-row">
             <div class="form-group col-md-12">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="type_payment" id="type_payment1" value="1" checked>
+                    <input class="form-check-input" type="radio" name="type_payment" id="type_payment1" value="1"
+                        checked>
                     <label class="form-check-label" for="type_payment1">พรบ.</label>
                 </div>
                 <div class="form-check form-check-inline">
@@ -12,18 +27,19 @@
                 </div>
             </div>
             <div class="form-group col-md-8">
-                    <input type="text" name="search" id="search_stock_id_print" class="form-control" placeholder="ค้นหาเลขกรมธรรม์ / ทะเบียนรถ / เลขตัวถังรถ เพื่อทำการดึงข้อมูล" >
+                <input type="text" name="search" id="search_stock_id_print" class="form-control" placeholder="ค้นหาเลขกรมธรรม์ / ทะเบียนรถ / เลขตัวถังรถ เพื่อทำการดึงข้อมูล">
                 <div id="check_stock_id"></div>
             </div>
             <div class="form-group col-md-12">
-                <input type="checkbox" name="sum_type" id="sum_type" checked> 
+                <input type="checkbox" name="sum_type" id="sum_type" checked>
                 <label class="form-check-label" for="sum_type">ควบพรบ. หรือ สมัครใจ</label>
             </div>
             <div class="form-group col-md-12">
-                <button class="btn btn-info px-5" name="search_stock" type="submit" id="stock_id_print"><i class="fas fa-search"></i> ค้นหา</button>
+                <button class="btn btn-info px-5" name="search_stock" type="submit" id="stock_id_print"><i class="fas fa-search"></i>
+                    ค้นหา</button>
             </div>
         </div>
-	</div>
+    </div>
 </div>
 <div class="card" id="load_card" style="display:none;">
     <div class="card-body d-flex justify-content-center">
@@ -58,7 +74,7 @@
             </div>
             <div class="col-12">
                 <p class="lead">สิ่งที่ส่งมาด้วย กรมธรรม์ &nbsp;<span id="total_stock"> 0 </span>&nbsp; ฉบับ /
-                <input type="text" name="print_form2" id="print_form2" class="form-control-static" placeholder="กรอกข้อมูล"></p>
+                    <input type="text" name="print_form2" id="print_form2" class="form-control-static" placeholder="กรอกข้อมูล"></p>
             </div>
             <div class="col-12 text-center my-3">
                 <p class="lead">ดังรายการชำระต่อไปนี้</p>
@@ -74,25 +90,29 @@
             <div class="col">
                 <div class="form-group">
                     <label>ยี่ห้อ</label>
-                    <input type="text" name="car_brand" id="get_value_car_brand" class="form-control-plaintext" readonly>
+                    <input type="text" name="car_brand" id="get_value_car_brand" class="form-control-plaintext"
+                        readonly>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
                     <label>ทะเบียน</label>
-                    <input type="text" name="car_number" id="get_value_car_number" class="form-control-plaintext" readonly>
+                    <input type="text" name="car_number" id="get_value_car_number" class="form-control-plaintext"
+                        readonly>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
                     <label>ระยะคุ้มครอง</label>
-                    <input type="text" name="insure_date" id="get_value_insure_date" class="form-control-plaintext" readonly>
+                    <input type="text" name="insure_date" id="get_value_insure_date" class="form-control-plaintext"
+                        readonly>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
                     <label>ควบพรบ. หรือ สมัครใจ (ถ้ามี)</label>
-                    <input type="text" name="stock_status" id="get_value_stock_status" class="form-control-plaintext" readonly>
+                    <input type="text" name="stock_status" id="get_value_stock_status" class="form-control-plaintext"
+                        readonly>
                 </div>
             </div>
         </div>
@@ -110,15 +130,15 @@
                             <th>หัก ณ ที่จ่าย 1% (ถ้ามี)</th>
                             <th>ยอดรวมชำระ</th>
                         </tr>
-                        </thead>
-                        <tbody id="get_stock_table">
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="7" class="text-right">ยอดรวมชำระ</td>
-                                <td id="get_value_total"></td>
-                            </tr>
-                        </tfoot>
+                    </thead>
+                    <tbody id="get_stock_table">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="7" class="text-right">ยอดรวมชำระ</td>
+                            <td id="get_value_total"></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             <div class="col-12">
@@ -129,35 +149,51 @@
                 <p class="lead text-center">ผู้จัดการ</p>
             </div>
             <div class="col-12 my-4">
-                <p class="lead py-2">ลงชื่อ<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:350px;"> </small>ผู้รับเอกสาร</p>
-                <p class="lead py-4">ชำระโดย เงินสด<span style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;position: relative;"> <span id="get_value_total2" style="right: 50%;position: absolute;"> </span></span>บาท</p>
+                <p class="lead py-2">ลงชื่อ<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:350px;">
+                    </small>ผู้รับเอกสาร</p>
+                <p class="lead py-4">ชำระโดย เงินสด<span class="getPayment">
+                        <span id="get_value_total2" style="left: 20%;position: absolute;"> </span></span>บาท</p>
                 <p class="lead pb-3">
-                    เบี้ยจ่ายเกิน (ถ้ามี) <input type="text" class="form-control-static" name="print_form3" id="print_form3" placeholder="ระบุ"> บาท 
-                    ค้างชำระ (ถ้ามี) <input type="text" class="form-control-static" name="print_form4" id="print_form4" placeholder="ระบุ"> บาท
+                    เบี้ยจ่ายเกิน (ถ้ามี) <input type="text" class="form-control-static" name="print_form3" id="print_form3"
+                        placeholder="ระบุ"> บาท
+                    ค้างชำระ (ถ้ามี) <input type="text" class="form-control-static" name="print_form4" id="print_form4"
+                        placeholder="ระบุ"> บาท
                 </p>
                 <p class="lead pb-2">
-                    เช็คธนาคาร<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
-                    สาขา<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
-                    ลงวันที่<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
+                    เช็คธนาคาร<span class="getPayment">
+                        <span id="get_value_bank2" style="left: 20%;position: absolute;"> </span></span>
+                    สาขา<span class="getPayment">
+                        <span id="get_value_branch2" style="left: 20%;position: absolute;"> </span></span>
+                    ลงวันที่<span class="getPayment">
+                        <span id="get_value_date2" style="left: 20%;position: absolute;"> </span></span>
                 </p>
                 <p class="lead pb-4">
-                    เลขที่เช็ค<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
-                    จำนวนเงิน<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>บาท
+                    เลขที่เช็ค<span class="getPayment2">
+                        <span id="get_value_cheque2" style="left: 20%;position: absolute;"> </span></span>
+                    จำนวนเงิน<span class="getPayment">
+                        <span id="get_value_total2_2" style="left: 20%;position: absolute;"> </span></span>บาท
                 </p>
                 <p class="lead pb-4">
-                    โอน<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>บาท
+                    โอน<span class="getPayment">
+                        <span id="get_value_total2_3" style="left: 20%;position: absolute;"> </span></span>บาท
                 </p>
                 <p class="lead pb-2">
-                    บัตรเครดิต<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
-                    VISA / <small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
-                    เลขที่บัตร<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>
+                    บัตรเครดิต<span class="getPayment">
+                        <span id="get_value_bank4" style="left: 20%;position: absolute;"> </span></span>
+                    ประเภทบัตร <span class="getPayment2">
+                        <span id="get_value_type4" style="left: 20%;position: absolute;"> </span></span>
+                    
                 </p>
                 <p class="lead pb-4">
-                    จำนวนเงิน<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:250px;"> </small>บาท
+                    เลขที่บัตร<span class="getPayment2">
+                        <span id="get_value_num4" style="left: 20%;position: absolute;"> </span></span>
+                    จำนวนเงิน<span class="getPayment">
+                        <span id="get_value_total2_4" style="left: 20%;position: absolute;"> </span></span>บาท
                 </p>
             </div>
             <div class="col-8 mb-4">
-                <p class="lead py-2">ลงชื่อ<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:300px;"> </small>ผู้รับเงินสด / เช็ค / บัตรเครดิต </p>
+                <p class="lead py-2">ลงชื่อ<small style="border-bottom-style: dotted;border-bottom-width: thin; padding-right:300px;">
+                    </small>ผู้รับเงินสด / เช็ค / บัตรเครดิต </p>
             </div>
             <div class="col-4 mb-4 ">
                 <div class="input-group mb-3">
@@ -170,7 +206,7 @@
         </div>
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <button  id="btn_submit_print1" class="btn btn-success btn-lg px-5">สั่งพิมพ์</button>
+                <button id="btn_submit_print1" class="btn btn-success btn-lg px-5">สั่งพิมพ์</button>
             </div>
         </div>
     </div>
